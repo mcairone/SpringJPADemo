@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:wlevs="http://www.bea.com/ns/wlevs/spring"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+  http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd
+  http://www.springframework.org/schema/osgi
+  http://www.springframework.org/schema/osgi/spring-osgi.xsd
+  http://www.bea.com/ns/wlevs/spring
+  http://www.bea.com/ns/wlevs/spring/ocep-epn.xsd
+  http://www.springframework.org/schema/tx 
+  http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+  <!--Spring Bean definitions go here-->
+ 
+  <osgi:service id ="em" interface="javax.persistence.EntityManagerFactory" ref="entityManagerFactory" />
+  
+  <!-- bean post-processor for JPA annotations  -->
+  <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/> 
+ 
+ 
+  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" >
+    <property name="persistenceUnitName" value="helloworld" />   
+   </bean>
+   
+   <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+   
+   <bean id="helloWorldEventDao" class="com.csc.oep.dao.HelloWorldEventDao" /> 
+   
+   <bean id="helloWorldService" class="com.csc.oep.service.HelloWorldServiceImpl" autowire="byName" /> 
+    
+    <tx:annotation-driven transaction-manager="txManager" />
+  
+</beans>

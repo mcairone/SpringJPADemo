@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+             
+    <persistence-unit name="helloworld" transaction-type="RESOURCE_LOCAL">
+      
+      <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+      
+      <class>com.csc.oep.entity.HelloWorldEntity</class>
+      
+      <properties>
+        <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+        <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+        <property name="eclipselink.weaving" value="false"/>
+        <property name="eclipselink.jdbc.read-connections.min" value="1" />
+        <property name="eclipselink.jdbc.write-connections.mine" value="1" />
+  
+        <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@vmi67182.contabo.host:1521:XE"/>
+        <property name="javax.persistence.jdbc.user" value="JPADEMO"/>
+        <property name="javax.persistence.jdbc.password" value="jpademo"/>
+        
+      </properties>
+
+</persistence-unit>           
+
+</persistence>
